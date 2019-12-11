@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+</head>
+
+<body class="">
+	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <a class="navbar-brand" href="#">Socket</a>
+	</nav>
+	<div class="container pt-4">
+		<h2>Cuenta</h2>
+		<hr>
+	   <div class="row">
+		  <div class="col-sm-6">
+		    <div class="card bg-light mb-3" >
+			  <div class="card-header">Añadir Topic:</div>
+			  <div class="card-body">
+			  	<form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Path</label>
+						<input type="email" class="form-control" id="nombreTopic" aria-describedby="emailHelp">
+					</div>
+					<div class="btn btn-primary" onclick="crearTopic();">Añadir</div>
+				</form>
+			  </div>
+			</div>
+
+			<div class="card bg-light mb-3" >
+			  <div class="card-header">Añadir dispositivo:</div>
+			  <div class="card-body">
+			    <form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Nombre</label>
+						<input type="email" class="form-control" id="nombre" aria-describedby="emailHelp">
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlSelect1">Categoria</label>
+						<select class="form-control" id="categoria">
+							<option>Temperatura</option>
+							<option>Humedad</option>
+							<option>Voltaje</option>
+							<option>Otros</option>
+						</select>
+					</div>
+	
+					<div class="btn btn-primary" onclick="crearSensor();">Añadir</div>
+				</form>
+			  </div>
+			</div>
+		  </div>
+		  <div class="col-sm-6" >
+
+		    <div class="card bg-light mb-3 " >
+			  <div class="card-header">Topics</div>
+			  <div class="pr-3 pl-3 pb-3" id="dispositivos">
+				  
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+	</div>
+	<div class="col-md-10 container">
+		<div class="card bg-light mb-3" >
+			<div class="card-header">Consola</div>
+		  	<div class="card-body">
+		  		<textarea  class="form-control mb-2"></textarea>
+		  		<div class="form-group d-flex justify-content-space-around">
+		  			<input type="" name="" class="form-control col-md-10">
+		  			<div class="btn btn-primary col-md-2">Enviar</div>
+		  		</div>
+				
+			</div>
+		</div>		
+	</div>
+
+    <script src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/socket-custom.js"></script>
+</body>
+
+</html>
