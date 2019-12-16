@@ -12,8 +12,6 @@ app.post('/topic',(req,res)=>{
 		cliente: body.cliente
 	});
 
-	console.log(topic);
-
 	topic.save((err, topicDB)=>{
 		if(err){
 			return res.status(500).json({
@@ -71,6 +69,5 @@ app.get('/topic',(req,res)=>{
 			});
 	})
 });
-
 
 module.exports = app;

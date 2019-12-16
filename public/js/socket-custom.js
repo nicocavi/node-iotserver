@@ -5,6 +5,8 @@ let cliente = {};
 
  datos()
 
+console.log(socket.id);
+
 function datos(){
 	let email = 'nico_cavi@hotmail.com';
 	let password = 'cavilla';
@@ -30,40 +32,33 @@ socket.on('connect', function(){
 	console.log('Conectado al servidor');
 
 });
+
 console.log(cliente);
+
 socket.emit('nuevo', cliente,(data)=>{
-	console.log("Topic creado!");
 	console.log(data);
 })
 
 
-function crearSensor(){
-	let nombre = document.getElementById("nombre").value;
-	let categoria = document.getElementById("categoria").value;
-	let params = 30;
-	socket.emit('agregarSensor', {
-		nombre,
-		categoria,
-		params
-	},(data)=>{
-		console.log(data);
-		var midiv = document.createElement("div");
-		midiv.setAttribute("class","card-body border rounded border-secondary mt-3");
-		midiv.innerHTML = '<h5 class="card-title">'+data.nombre+'</h5><p class="card-text">Temperatura: <span id="temp-dis">'+data.params+'</span> C°</p>';
-		div.appendChild(midiv);
-	});
-}
+function suscribir(){
+	let id = document.querySelector('#idTopic').value;
+	socket.emit('suscribir', {id}, ()=>{
 
-function crearTopic(){
-	let path = document.querySelector("#nombreTopic").value;
-	console.log(path);
-	let id = cliente._id;
-	socket.emit('crearTopic', {path, id},(data)=>{
-		console.log("Topic creado!");
-		console.log(data);
 	})
 }
 
+function enviarMensaje(){
+	let mensaje = document.querySelector('#mensaje').value;
+	socket.emit('enviarMensaje', {mensaje, topic: cliente.topic});
+	mensaje.value = '';
+}
+
+
+socket.on('menssage', (data)=>{
+	let consola = document.querySelector('#consola');
+	consola.value = consola.value + '<'+data.date+'> '+data.menssage+'\n';
+	cliente.topic = data.topic;
+})
 
 // Escuchar 
 socket.on('disconnect',()=>{

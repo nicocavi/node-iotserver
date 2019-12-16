@@ -16,6 +16,10 @@ let clienteSchema = new Schema({
 	password: {
 		type: String,
 		required: [true, 'El password es requerido']
+	},
+	topic:{
+		type: String,
+		required: false
 	}
 });
 

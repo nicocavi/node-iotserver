@@ -41,43 +41,30 @@ io.on('connection', (cliente)=>{
 		});
 	});
 
-	// Escuchar al cliente
-	cliente.on('crearTopic', (data, callback)=>{
-
-		let topic = new Topic({
-			path: data.path,
-			cliente: data.id
-		});
-
-
-		topic.save((err, topicDB)=>{
-			
-			let respuesta = {
-					ok: true,
-					topic: topicDB
-				}
-			if(err){
-				respuesta =  {
-					ok: false,
-					err
-				};
-			}
-
-			callback(respuesta);
-		});
-
-	});
-
-	
-
-	cliente.on('agregarSensor',(data, callback)=>{
-		let sensor = sensores.agregarSensor(cont++, cliente.id, data.nombre, data.categoria, data.params);
-		console.log(sensor);
-		callback(sensor);
-	});
+	cliente.on('suscribir', (data, callback)=>{
+		console.log(data);
+		cliente.join(data.id);
+		cliente.emit('menssage',{
+			ok:true,
+			menssage: 'Subscripto a '+data.id,
+			date: new Date(),
+			topic: data.id
+		})
+	})
 
 
+	cliente.on('enviarMensaje', (data)=>{
+		let mensaje = {
+			ok:true,
+			menssage: data.mensaje,
+			date: new Date(),
+			topic: data.topic
+		}
 
+
+		console.log('Topic: ' + data.topic)
+		cliente.broadcast.to(data.topic).emit('menssage',mensaje);
+	})
 
 	cliente.on('disconnect', ()=>{
 
